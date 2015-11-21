@@ -15,7 +15,7 @@ public class ClassNode {
          //System.out.println("Options: " + Arrays.toString(strOptions));
          this.name = name;
          type = "OR".split(", ");
-         prereqs = new ArrayList<ClassNode>;
+         prereqs = new ArrayList<ClassNode>();
          for(int i = 0; i < strOptions.length; i++) {
             prereqs.add(new ClassNode(new String(strOptions[i])));
 	 }
@@ -42,7 +42,7 @@ public class ClassNode {
       prereqs = new ArrayList<ClassNode>();
       if (!strPrereqs[0].equals("None")) {
          for(int i = 0; i < strPrereqs.length; i++){
-            prereqs[i].add(new ClassNode(strPrereqs[i]));
+            prereqs.add(new ClassNode(strPrereqs[i]));
 	 }
       }
        }
@@ -54,9 +54,9 @@ public class ClassNode {
         //info += "Type: " + Arrays.toString(type) + "\n";
         //info += "Offered: " + Arrays.toString(offered) + "\n";
         //info += "Prereqs: ";
-        for (int i = 0; i < prereqs.length; i++)
+        for (int i = 0; i < prereqs.size(); i++)
 	    info += prereqs.get(i).toString() + " ";
-        if (prereqs.length > 0) info += " --> ";
+        if (prereqs.size() > 0) info += " --> ";
         info += name;
         return info;
     }
@@ -65,16 +65,36 @@ public class ClassNode {
 	return this.name;
     }
     
+    public Set<String> getPrereqs() {
+	Set<String> reqs = new HashSet<String>();
+        for (int i = 0; i < prereqs.size(); i++) {
+            reqs.add(prereqs.get(i).getName());
+            for (String req : prereqs.get(i).getPrereqs())
+		reqs.add(req);
+	}
+        return reqs;
+    }
+    
     public void remove(String taken){
-      for(int i = 0; i < prereqs.length; i++){
+	for(int i = 0; i < prereqs.size(); i++){
 	  if (prereqs.get(i).getName().contains(taken)) {
-              System.out.println(prereqs.get(i).getName());
 	      System.out.println("Prereq found, deleting");
 	      prereqs.remove(i);
-              System.out.println(prereqs.get(i).getName());
 	  } else {
             prereqs.get(i).remove(taken);
           }
       }
    }
+
+    public int getDepth(String req) {
+        int depth;
+        int depth_max = 0;
+	for (int i = 0; i < prereqs.size(); i++) {
+	    if (prereqs.get(i).getName().contains(req)) return 1;
+            depth = prereqs.get(i).getDepth(req);
+	    if (depth > 0) depth++;
+            if (depth > depth_max) depth_max = depth;
+	}
+	return depth_max;
+    }
 }
