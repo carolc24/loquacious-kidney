@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class UserInterface {
+
+   public static void main(String[] args){
+      // What engineering major are you interested in?
+      Scanner console = new Scanner(System.in);
+      System.out.print("What engineering major are you interested in? ");
+      MajorNode major = new MajorNode(console.next());
+      System.out.println();
+      
+      // Print out list of prereqs for that major
+      System.out.println(major);
+      
+      // Which of these classes have you taken? (Enter if none)
+      boolean hasClass = true;
+      while(hasClass){
+         System.out.print("Which of these classes have you already taken (enter if none)? ");
+         String taken = console.nextLine();
+         
+         if(taken.equals("")){
+            hasClass = false;
+         } else {
+            major.remove(taken);
+         }
+      }
+      System.out.println();
+      
+      // Print out uspdated list of classes needed to take
+      System.out.println(majors);
+      
+      // Here's a suggested schedule
+      System.out.println("Here's a Suggested Schedule: ");
+      //majors.schedule(); 
+   }
+
+}
