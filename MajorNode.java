@@ -56,7 +56,7 @@ public class MajorNode {
        return depth_max;
    }
 
-    public void makeSchedule(int load) {
+    public void makeSchedule() {
         int i = 1;
         ArrayList<Integer> depths = new ArrayList<Integer>();
         for (int j = 0; j < classNames.size(); j++)
