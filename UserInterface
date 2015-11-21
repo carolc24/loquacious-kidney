@@ -32,7 +32,7 @@ public class UserInterface {
       
       // Here's a suggested schedule
       System.out.println("Here's a Suggested Schedule: ");
-      //major.schedule(); 
+      major.makeSchedule(); 
    }
 
 }
