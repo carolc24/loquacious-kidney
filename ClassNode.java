@@ -7,7 +7,7 @@ public class ClassNode {
    private int credits;
    private String[] type;
    private String[] offered;
-   private ClassNode[] prereqs;
+   private ArrayList<ClassNode> prereqs;
    
    public ClassNode(String name) throws FileNotFoundException{
        if (name.contains("/")) {
@@ -15,9 +15,9 @@ public class ClassNode {
          //System.out.println("Options: " + Arrays.toString(strOptions));
          this.name = name;
          type = "OR".split(", ");
-         prereqs = new ClassNode[strOptions.length];
+         prereqs = new ArrayList<ClassNode>;
          for(int i = 0; i < strOptions.length; i++) {
-            prereqs[i] = new ClassNode(new String(strOptions[i]));
+            prereqs.add(new ClassNode(new String(strOptions[i])));
 	 }
        } else {
 
@@ -39,12 +39,10 @@ public class ClassNode {
 
       String[] strPrereqs = data.nextLine().split(", ");
       //System.out.println("Prereqs: " + Arrays.toString(strPrereqs));
-      if (strPrereqs[0].equals("None")) {
-         prereqs = new ClassNode[0];
-      } else {
-	 prereqs = new ClassNode[strPrereqs.length];
+      prereqs = new ArrayList<ClassNode>();
+      if (!strPrereqs[0].equals("None")) {
          for(int i = 0; i < strPrereqs.length; i++){
-            prereqs[i] = new ClassNode(strPrereqs[i]);
+            prereqs[i].add(new ClassNode(strPrereqs[i]));
 	 }
       }
        }
@@ -57,7 +55,7 @@ public class ClassNode {
         //info += "Offered: " + Arrays.toString(offered) + "\n";
         //info += "Prereqs: ";
         for (int i = 0; i < prereqs.length; i++)
-	    info += prereqs[i].toString() + " ";
+	    info += prereqs.get(i).toString() + " ";
         if (prereqs.length > 0) info += " --> ";
         info += name;
         return info;
@@ -69,14 +67,13 @@ public class ClassNode {
     
     public void remove(String taken){
       for(int i = 0; i < prereqs.length; i++){
-	  if (prereqs[i].getName().contains(taken)) {
-              System.out.println(prereqs[i].getName());
+	  if (prereqs.get(i).getName().contains(taken)) {
+              System.out.println(prereqs.get(i).getName());
 	      System.out.println("Prereq found, deleting");
-	      for (int j = i; j < prereqs.length - 1; j++)
-		  prereqs[j] = prereqs[j + 1];
-              System.out.println(prereqs[i].getName());
+	      prereqs.remove(i);
+              System.out.println(prereqs.get(i).getName());
 	  } else {
-            prereqs[i].remove(taken);
+            prereqs.get(i).remove(taken);
           }
       }
    }
