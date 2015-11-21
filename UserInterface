@@ -1,12 +1,13 @@
+import java.io.*;
 import java.util.*;
 
 public class UserInterface {
 
-   public static void main(String[] args){
+   public static void main(String[] args) throws FileNotFoundException{
       // What engineering major are you interested in?
       Scanner console = new Scanner(System.in);
       System.out.print("What engineering major are you interested in? ");
-      MajorNode major = new MajorNode(console.next());
+      MajorNode major = new MajorNode(console.nextLine());
       System.out.println();
       
       // Print out list of prereqs for that major
@@ -27,11 +28,11 @@ public class UserInterface {
       System.out.println();
       
       // Print out uspdated list of classes needed to take
-      System.out.println(majors);
+      System.out.println(major);
       
       // Here's a suggested schedule
       System.out.println("Here's a Suggested Schedule: ");
-      //majors.schedule(); 
+      //major.schedule(); 
    }
 
 }
