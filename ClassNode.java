@@ -65,4 +65,14 @@ public class ClassNode {
     public String getName() {
 	return this.name;
     }
+    
+    public void remove(ClassNode taken){
+      if(name.contains(taken.name)){
+         prereqs = new ClassNode[0];
+      } else {
+         for(int i = 0; i < prereqs.length; i++){
+            remove(prereqs[i]);
+         }
+      }
+   }
 }
