@@ -25,7 +25,7 @@ public class MajorNode {
    public String toString(){
       String result = name + ": \n";
       for(int i = 0; i < requiredClasses.length; i++){
-         result += requiredClasses[i];
+         result += requiredClasses[i] + "\n";
       }
       return result;
    }
