@@ -5,7 +5,7 @@ import java.lang.*;
 public class MajorNode {
    
    private String name;
-   private ClassNode[] requiredClasses;
+   private ArrayList<ClassNode> requiredClasses;
    
    public MajorNode(String majorName) throws FileNotFoundException{
       Scanner data = new Scanner(new File("majors.txt"));
@@ -15,9 +15,9 @@ public class MajorNode {
       }
 
       String[] strClasses = data.nextLine().split(", ");
-      requiredClasses = new ClassNode[strClasses.length];
+      requiredClasses = new ArrayList<ClassNode>();
       for(int i = 0; i < strClasses.length; i++){
-         requiredClasses[i] = new ClassNode(strClasses[i]);
+         requiredClasses.set(i, new ClassNode(strClasses[i]));
       }
    }
    
@@ -25,7 +25,7 @@ public class MajorNode {
    public String toString(){
       String result = name + ": \n";
       for(int i = 0; i < requiredClasses.length; i++){
-         result += requiredClasses[i] + "\n";
+         result += requiredClasses.get(i) + "\n";
       }
       return result;
    }
