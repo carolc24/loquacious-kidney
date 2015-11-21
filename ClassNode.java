@@ -52,14 +52,13 @@ public class ClassNode {
 
     public String toString() {
 	String info = new String();
-        info += "Name: " + name + "\n";
-        info += "Credits: " + credits + "\n";
-        info += "Type: " + Arrays.toString(type) + "\n";
-        info += "Offered: " + Arrays.toString(offered) + "\n";
-        info += "Prereqs: ";
+        info += name + "\n";
+        //info += "Credits: " + credits + "\n";
+        //info += "Type: " + Arrays.toString(type) + "\n";
+        //info += "Offered: " + Arrays.toString(offered) + "\n";
+        //info += "Prereqs: ";
         for (int i = 0; i < prereqs.length; i++)
-            info += prereqs[i].getName() + ", ";
-	info += "\n";
+	    info += prereqs[i].toString();
         return info;
     }
 

@@ -23,7 +23,7 @@ public class MajorNode {
    
    //print
    public String toString(){
-      String result = name + ": ";
+      String result = name + ": \n";
       for(int i = 0; i < requiredClasses.length; i++){
          result += requiredClasses[i];
       }
