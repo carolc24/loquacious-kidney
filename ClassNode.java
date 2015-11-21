@@ -67,13 +67,17 @@ public class ClassNode {
 	return this.name;
     }
     
-    public void remove(ClassNode taken){
-      if(name.contains(taken.name)){
-         prereqs = new ClassNode[0];
-      } else {
-         for(int i = 0; i < prereqs.length; i++){
-            remove(prereqs[i]);
-         }
+    public void remove(String taken){
+      for(int i = 0; i < prereqs.length; i++){
+	  if (prereqs[i].getName().contains(taken)) {
+              System.out.println(prereqs[i].getName());
+	      System.out.println("Prereq found, deleting");
+	      for (int j = i; j < prereqs.length - 1; j++)
+		  prereqs[j] = prereqs[j + 1];
+              System.out.println(prereqs[i].getName());
+	  } else {
+            prereqs[i].remove(taken);
+          }
       }
    }
 }

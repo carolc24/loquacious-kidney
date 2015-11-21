@@ -31,9 +31,9 @@ public class MajorNode {
    }
    
    //classes taken
-   public void remove(ClassNode taken){
+   public void remove(String taken){
       for(int i = 0; i < requiredClasses.length; i++){
-         if(requiredClasses[i].contains(taken.getName())){
+	  if(requiredClasses[i].getName().contains(taken)){
             for(int j = i; j < requiredClasses.length - 1; j++){
                requiredClasses[j] = requiredClasses[j + 1];
             }

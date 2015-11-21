@@ -7,6 +7,8 @@ public class Test{
       MajorNode test = new MajorNode("IE");
       System.out.println(test.toString());
       //System.out.println(test);
+      test.remove("MATH 124");
+      System.out.println(test.toString());
    }
    
 }
