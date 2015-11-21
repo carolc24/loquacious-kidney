@@ -31,5 +31,15 @@ public class MajorNode {
    }
    
    //classes taken
-   
+   public void remove(ClassNode taken){
+      for(int i = 0; i < requiredClasses.length; i++){
+         if(requiredClasses[i].contains(taken.getName())){
+            for(int j = i; j < requiredClasses.length - 1; j++){
+               requiredClasses[j] = requiredClasses[j + 1];
+            }
+         } else {
+            requiredClasses[i].remove(taken);
+         }
+      }
+   }
 }
